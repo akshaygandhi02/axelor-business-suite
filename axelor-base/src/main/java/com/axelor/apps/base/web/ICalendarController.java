@@ -112,13 +112,4 @@ public class ICalendarController {
     calendarService.sync(cal, false, 0);
     response.setReload(true);
   }
-
-  public void validate(ActionRequest request, ActionResponse response) {
-
-    if (request.getContext().get("newPassword") != null)
-      response.setValue(
-          "password",
-          calendarService.getCalendarEncryptPassword(
-              request.getContext().get("newPassword").toString()));
-  }
 }

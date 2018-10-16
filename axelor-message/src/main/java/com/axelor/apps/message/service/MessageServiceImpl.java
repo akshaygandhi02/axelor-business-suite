@@ -256,7 +256,7 @@ public class MessageServiceImpl implements MessageService {
             mailAccount.getHost(),
             mailAccount.getPort().toString(),
             mailAccount.getLogin(),
-            mailAccountService.getDecryptPassword(mailAccount.getPassword()),
+            mailAccount.getPassword(),
             mailAccountService.getSecurity(mailAccount));
 
     List<String> replytoRecipients = this.getEmailAddresses(message.getReplyToEmailAddressSet()),

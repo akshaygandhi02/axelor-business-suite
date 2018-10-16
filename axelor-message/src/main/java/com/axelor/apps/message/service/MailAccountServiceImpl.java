@@ -25,7 +25,6 @@ import com.axelor.apps.message.db.repo.EmailAddressRepository;
 import com.axelor.apps.message.db.repo.MessageRepository;
 import com.axelor.apps.message.exception.IExceptionMessage;
 import com.axelor.apps.tool.date.DateTool;
-import com.axelor.apps.tool.service.CipherService;
 import com.axelor.exception.AxelorException;
 import com.axelor.exception.db.repo.TraceBackRepository;
 import com.axelor.i18n.I18n;
@@ -68,8 +67,6 @@ public class MailAccountServiceImpl implements MailAccountService {
   static final int CHECK_CONF_TIMEOUT = 5000;
 
   @Inject protected EmailAccountRepository mailAccountRepo;
-
-  @Inject private CipherService cipherService;
 
   @Inject protected EmailAddressRepository emailAddressRepo;
 
@@ -187,7 +184,7 @@ public class MailAccountServiceImpl implements MailAccountService {
               mailAccount.getHost(),
               port,
               mailAccount.getLogin(),
-              getDecryptPassword(mailAccount.getPassword()),
+              mailAccount.getPassword(),
               getSecurity(mailAccount));
     } else if (serverType == EmailAccountRepository.SERVER_TYPE_IMAP) {
       account =
@@ -195,7 +192,7 @@ public class MailAccountServiceImpl implements MailAccountService {
               mailAccount.getHost(),
               mailAccount.getPort().toString(),
               mailAccount.getLogin(),
-              getDecryptPassword(mailAccount.getPassword()),
+              mailAccount.getPassword(),
               getSecurity(mailAccount));
     } else {
       account =
@@ -203,7 +200,7 @@ public class MailAccountServiceImpl implements MailAccountService {
               mailAccount.getHost(),
               mailAccount.getPort().toString(),
               mailAccount.getLogin(),
-              getDecryptPassword(mailAccount.getPassword()),
+              mailAccount.getPassword(),
               getSecurity(mailAccount));
     }
 
@@ -391,17 +388,5 @@ public class MailAccountServiceImpl implements MailAccountService {
         e.printStackTrace();
       }
     }
-  }
-
-  @Override
-  public String getEncryptPassword(String password) {
-
-    return cipherService.encrypt(password);
-  }
-
-  @Override
-  public String getDecryptPassword(String password) {
-
-    return cipherService.decrypt(password);
   }
 }

@@ -8,12 +8,12 @@
 	  <field name="user"/>
 	</grid>
 	
-	<form name="calendar-form" model="com.axelor.apps.base.db.ICalendar" title="Calendar" onSave="com.axelor.apps.base.web.ICalendarController:validate" width="large">
+	<form name="calendar-form" model="com.axelor.apps.base.db.ICalendar" title="Calendar" onSave="action-calendar-record-set-password" width="large">
 		<menubar>
 			<menu title="Actions">
 				<item title="Export calendar" action="com.axelor.apps.base.web.ICalendarController:exportCalendar"/>
 				<item title="Import calendar" action="com.axelor.apps.base.web.ICalendarController:importCalendar"/>
-				<item title="Synchronize calendar" action="save,com.axelor.apps.base.web.ICalendarController:validate,save,com.axelor.apps.base.web.ICalendarController:synchronizeCalendar"/>
+				<item title="Synchronize calendar" action="save,action-calendar-record-set-password,save,com.axelor.apps.base.web.ICalendarController:synchronizeCalendar"/>
 			</menu>
 		</menubar>
 		<panel name="main" colSpan="12">
@@ -58,7 +58,7 @@
 					</panel>
 				</panel>
 				<panel colSpan="12">
-					<button colSpan="3" name="connect" title="Connect" onClick="save,com.axelor.apps.base.web.ICalendarController:validate,save,com.axelor.apps.base.web.ICalendarController:testConnect"/>
+					<button colSpan="3" name="connect" title="Connect" onClick="save,action-calendar-record-set-password,save,com.axelor.apps.base.web.ICalendarController:testConnect"/>
 					<field name="isValid" readonly="true" showTitle="false">
 						<viewer depends="isValid">
 							<![CDATA[
@@ -76,6 +76,10 @@
 	
 	<action-record name="action-calendar-record-set-port" model="com.axelor.apps.base.db.ICalendar">
      	<field name="port" expr="eval: isSslConnection ? 443 : 80"/>
+    </action-record>
+    
+    <action-record name="action-calendar-record-set-password" model="com.axelor.apps.base.db.ICalendar">
+    	<field name="password" expr="eval: newPassword"/>
     </action-record>
 	
 </object-views>
