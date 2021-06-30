@@ -7,7 +7,7 @@
     <menuitem name="app-builder-studio" title="Studio" parent="app-builder-root" action="action.studio.view" order="10" />
 
     <action-view name="action.studio.view" title="Studio">
-        <view type="html" name="studio/custom-model" />
+        <view type="html" name="studio/editor" />
     </action-view>
 
     <menuitem name="app-builder-bpm" title="BPM" parent="app-builder-root" action="action.bpm.view" order="20" />
@@ -112,5 +112,12 @@
 		<view type="grid" name="value-mapper-grid" />
 		<view type="form" name="value-mapper-form"/>
 	</action-view>
+	
+	<menuitem title="Entity models" name="app-builder-config-entity-models" parent="app-builder-config" action="action.studio.entity.model.view" order="51"/>
 
+	<action-view name="action.studio.entity.model.view" title="Entity models" model="com.axelor.studio.db.EntityModel">
+		<view type="grid" name="entity-model-grid"/>
+		<view type="form" name="entity-model-form"/>
+	</action-view>
+	
 </object-views>
